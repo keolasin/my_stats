@@ -1,7 +1,8 @@
 ---
-title: "my_stats"
+title: "Data in Public Health"
+description: "Thoughts on accessible & actionable data science to achieve health equity"
 ---
 
-This is a Quarto website.
+## List of blog posts
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Link to about page

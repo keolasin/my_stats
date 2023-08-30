@@ -2,15 +2,29 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "my_stats",
+    "title": "Data in Public Health",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Link to about page"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this site"
+    "text": "About this site\n\n\n\n Back to top"
+  },
+  {
+    "objectID": "index.html#list-of-blog-posts",
+    "href": "index.html#list-of-blog-posts",
+    "title": "Data in Public Health",
+    "section": "",
+    "text": "Link to about page"
+  },
+  {
+    "objectID": "index.html#link-to-about-page",
+    "href": "index.html#link-to-about-page",
+    "title": "Data in Public Health",
+    "section": "Link to about page",
+    "text": "Link to about page"
   }
 ]

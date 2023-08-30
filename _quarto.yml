@@ -2,16 +2,43 @@ project:
   type: website
 
 website:
-  title: "my_stats"
+  title: "Data in Public Health"
+  description: "Accessible, actionable data science to achieve health equity"
   navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
+    title: false
+    background: primary
+    search: true
+    right:
+      - icon: house-door
+        text: "Home"
+        file: index.qmd
+      - icon: file-person
+        text: "About"
+        file: about.qmd
+  page-footer: 
+    left: 
+      - href: https://mreyes.info
+        text: mreyes.info
+      - href: https://blog.mreyes.info
+        text: blog
+    center:
+      - icon: code-slash
+        href: https://github.com/keolasin/my_stats
+    right:
+      - icon: envelope
+        href: mailto:matthew@mreyes.info
+      - icon: linkedin
+        url: https://linkedin.com/u/reyesmatthew
+      - icon: github
+        url: https://github.com/keolasin
+  back-to-top-navigation: true
+      
+execute:
+  freeze: auto
 
 format:
   html:
-    theme: vapor
+    theme: a11y
     css: styles.css
     toc: true
 
