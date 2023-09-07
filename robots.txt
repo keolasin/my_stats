@@ -1,1 +1,1 @@
-Sitemap: https://github.com/keolasin/my_stats/sitemap.xml
+Sitemap: https://keolasin.github.io/my_stats/sitemap.xml
