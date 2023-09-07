@@ -4,5 +4,3 @@ description: "Thoughts on accessible & actionable data science to achieve health
 ---
 
 ## List of blog posts
-
-## Link to about page

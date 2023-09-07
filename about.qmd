@@ -1,5 +1,238 @@
 ---
-title: "About"
+title: "Matthew Reyes, MPH"
+image: https://res.cloudinary.com/keolasin/image/upload/v1597109380/personal-revamp/portrait.jpg
+about: 
+  id: hero-heading
+  template: trestles
+  image-shape: round
+  image-width: 15em
+  links:
+    - text: Email
+      href: mailto:matthew@mreyes.info
+      aria-label: email
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/reyesmatthew/
+      aria-label: LinkedIn
+    - text: GitHub
+      href: https://github.com/keolasin/
+      aria-label: GitHub
+comments: false
+sidebar: false
+page-layout: full
 ---
 
-About this site
+:::{#hero-heading}
+        
+## About me
+
+My name is Matthew Reyes (he/him/his).
+
+I'm an aspiring public health professional and data scientist. I'm most passionate about digital health equity, epidemiology, and improving community health.
+
+I spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around.
+
+:::
+
+:::{.panel-tabset}
+## Experience
+
+### Diversity, Equity, and Inclusion Master's Intern
+
+|     |  |
+|:----|-:|
+*Center for Digital Health Innovation at University of California, San Francisco* | Nov 2022 - May 2023
+: {.borderless .responsive}
+
+* Managed a project to align the Digital Patient Experience to enterprise health equity goals. 
+* Developed an equity analysis applying modern biostatistics, R, and Tableau for product evaluation. 
+* Created research and design guidelines for the product team to perform effective equity analyses. 
+* Led organization of UCSF’s first Digital Health Equity Symposium featuring leaders in the field. 
+* Presented analysis of digital health equity projects and opportunities to UCSF leadership. 
+
+### Data Consultant
+
+|     |  |
+|:----|-:|
+*D-Lab at University of California, Berkeley* | Aug 2022 - May 2023
+: {.borderless .responsive}
+
+* Consulted students, staff, and faculty on their research projects, providing data analytics solutions.
+
+### Healthcare UX Researcher and Designer
+
+|     |  |
+|:----|-:|
+*GoInvo* | Apr 2022 - Aug 2022
+: {.borderless .responsive}
+
+* Designed and developed a high-fidelity website and mobile app with a cross-functional team.
+* Conducted user research with target population to inform design and product team.
+* Provided public health expertise to open source health projects and studio client contracts.
+
+### UX Design and Communications Intern
+
+|     |  |
+|:----|-:|
+*Keva Health* | Dec 2021 - Apr 2022
+: {.borderless .responsive}
+
+* Managed social media marketing materials and schedule.
+* Provided design and user experience consultation to engineering team on product features.
+
+### Senior Pulmonary Function Technician
+
+|     |  |
+|:----|-:|
+*Adult Pulmonary Function Lab at University of California, San Francisco* | Jun 2016 - Apr 2022
+: {.borderless .responsive}
+
+* Trained new hires and pulmonary fellows in laboratory standards and protocols.
+* Managed laboratory inventory, equipment validation, and vendor support.
+* Drafted and maintained laboratory standard operating protocols.
+* Implemented statistical quality assurance system for equipment and control samples.
+
+### Emergency Room Medical Scribe
+
+|     |  |
+|:----|-:|
+*CEP America* | Aug 2015 - May 2016
+: {.borderless .responsive}
+
+* Transcribed and managed emergency room clinician's notes for patient encounters and medical charts.
+
+### Instructor
+
+|     |  |
+|:----|-:|
+*iD Tech* | May 2015 - Aug 2015
+: {.borderless .responsive}
+
+* Taught students basics in Java, HTML/CSS/JavaScript, and fundamental coding principles.
+
+### Laboratory Teaching Aid
+
+|     |  |
+|:----|-:|
+*Capaldi Lab at University of Arizona* | Aug 2014 - May 2015
+: {.borderless .responsive}
+
+* Guided students through a environmental stress response experiment in yeast, utilizing modern molecular biology laboratory porcesses like flow cytometry, PCR, and DNA microarrays.
+
+## Education
+
+### Master of Public Health (MPH)
+
+|     |  |
+|:----|-:|
+**University of California, Berkeley** </br> *Concentration in Epidemiology and Biostatistics* | 2021 - 2023
+: {.borderless .responsive}
+
+### Bachelor of Science (BSc)
+
+|     |  |
+|:----|-:|
+**University of Arizona** </br> *Double-Major in Molecular Biology, Neuroscience and Cognitive Science* </br> *Minor in Biochemistry* | 2011-2015
+: {.borderless .responsive}
+
+## Certifications
+
+### Certified Scrum Master (CSM)
+
+|     |  |
+|:----|-:|
+**Scrum Alliance, Inc.** </br> *UCSF Technical Project Management* | Dec 2022 - Dec 2024
+: {.borderless .responsive}
+
+[Link to certificate](https://bcert.me/bc/html/show-badge.html?b=mahhazmp)
+
+## Skills
+
+### Data Science and Quantitative Methods
+
+- **PostgreSQL and SQL** for relational database management
+- **SQL, SAS** for data management and cleaning, summary statistics and simple visualizations
+- **R** for advanced biostatistics, modeling, and complex visualizations
+- **Quarto** for sharing data-oriented projects
+- **Tableau** for data dashboards and business intelligence
+
+### UX Research and Qualitative Methods
+
+- **Focus groups**, key-informant, and in-depth interviews
+- **Interview guides** and checklists for structured & semi-structured interviews
+- **Qualtrics** for survey instruments and design focused on participant accessibility and equity
+
+### Project Management
+
+- **Notion** for general project management, notes, timelines, and tasks
+- **GitHub Projects** for open-source project management
+
+### Web Development
+
+- **HTML/CSS/Javascript** with **React** for general front-end development
+- **Gatsby.js** for static sites built with React
+- **Node.js** and **Express** for RESTful back-end services
+- **Apollo** for GraphQL APIs
+- **PostgreSQL** and Sequelize (ORM) for relational database management
+
+### Languages
+
+- **English** - native
+- **Spanish** - intermediate, written & spoken
+
+## Affiliations
+
+### Triathlete
+
+|     |  |
+|:----|-:|
+**USA Triathlon** | 2018 - 2020
+: {.borderless .responsive}
+
+Half (70.3 mi) and full (140.6) distances.
+
+### FOG Reading Partner
+
+|     |  |
+|:----|-:|
+**San Francisco Public Library** | 2018 - 2020
+: {.borderless .responsive}
+
+Volunteer reading partner with elementary school students learning to read.
+
+### Hack Mental Health
+
+|     |  |
+|:----|-:|
+**University of California, San Francisco** | 2019
+: {.borderless .responsive}
+
+Front-end web development contributor for a mood and wellness application as part of a hack-a-thon at UCSF.
+
+### Board Member and Camp Coordinator
+
+|     |  |
+|:----|-:|
+**Camp Wildcat** | 2013 - 2015
+: {.borderless .responsive}
+
+Board member, logistics, and project manager for 200-person, cost-free camps for vulnerable children in Southern Arizona as part of a 501(c)(3) non-profit organization.
+
+### Member and Committee Chair
+
+|     |  |
+|:----|-:|
+**Arizona Model United Nations** | 2013 - 2015
+: {.borderless .responsive}
+
+Conference attendee and committee organizer for local highschool Model United Nations clubs in Arizona.
+
+### Field Qualified Rescuer
+
+|     |  |
+|:----|-:|
+**Southern Arizona Rescue Association** | 2012 - 2014
+: {.borderless .responsive}
+
+Volunteer rescuer, aiding Pima County Sheriff's Department and community on search and rescue calls in Southern Arizona.
+
+:::

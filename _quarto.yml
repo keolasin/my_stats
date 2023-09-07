@@ -15,6 +15,12 @@ website:
       - icon: file-person
         text: "About"
         file: about.qmd
+  
+  sidebar:
+    style: floating
+    search: true
+    contents: auto
+  
   page-footer: 
     left: 
       - href: https://mreyes.info
@@ -32,13 +38,16 @@ website:
       - icon: github
         url: https://github.com/keolasin
   back-to-top-navigation: true
+  page-navigation: true
       
 execute:
   freeze: auto
 
 format:
   html:
-    theme: a11y
+    theme:
+      light: a11y
+      dark: vapor
     css: styles.css
     toc: true
 
