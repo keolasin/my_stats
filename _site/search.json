@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Data in Public Health",
-    "section": "",
-    "text": "Link to about page"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Matthew Reyes, MPH",
@@ -14,73 +7,10 @@
     "text": "Email\n  \n  \n     LinkedIn\n  \n  \n     GitHub\n  \n\n  \n  \n\n\nMy name is Matthew Reyes (he/him/his).\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
   },
   {
-    "objectID": "index.html#list-of-blog-posts",
-    "href": "index.html#list-of-blog-posts",
-    "title": "Data in Public Health",
-    "section": "",
-    "text": "Link to about page"
-  },
-  {
-    "objectID": "index.html#link-to-about-page",
-    "href": "index.html#link-to-about-page",
-    "title": "Data in Public Health",
-    "section": "Link to about page",
-    "text": "Link to about page"
-  },
-  {
-    "objectID": "about.html#bio",
-    "href": "about.html#bio",
-    "title": "Matthew Reyes",
-    "section": "",
-    "text": "My name is Matthew Reyes (he/him/his), and I am based in Oakland, CA.\nI’m an aspiring data science and public health professional, having recently completed a Master’s in Public Health focusing in epidemiology and biostatistics. I’ve worked on health disparity research for patients with rare lung diseases, UX research and design for an open-source mobile health application, and performed equity analysis for digital health products at UCSF.\nIn my free time, I enjoy a variety of activities, which lately include:\n\nrock climbing\nwatercolors\npracticing spanish and salsa dancing.\n\nI also have a dog named Bisbee who occupies most of my time and attention:"
-  },
-  {
-    "objectID": "about.html#summary",
-    "href": "about.html#summary",
-    "title": "Matthew Reyes, MPH",
-    "section": "",
-    "text": "My name is Matthew Reyes (he/him/his), and I’m based in Oakland, CA.\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
-  },
-  {
-    "objectID": "about.html#resume",
-    "href": "about.html#resume",
-    "title": "Matthew Reyes, MPH",
-    "section": "Resume",
-    "text": "Resume\n\nEducation\n\nMaster of Public Health\nUniversity of California, Berkeley | 2021 - 2023\nConcentration in Epidemiology and Biostatistics\n\n\nBachelor of Science\nUniversity of Arizona | 2011 - 2015\nMajors in: - Molecular and Cellular Biology - Neuroscience and Cognitive Science - Minor in Biochemistry\n\n\n\nExperiences\n\nDiversity, Equity, and Inclusion Master’s Intern\nCenter for Digital Health Innovation at University of California, San Francisco 2022-2023"
-  },
-  {
-    "objectID": "about.html#education",
-    "href": "about.html#education",
-    "title": "Matthew Reyes, MPH",
-    "section": "Education",
-    "text": "Education\n\nMaster of Public Health\nUniversity of California, Berkeley 2021 - 2023 Concentration in Epidemiology and Biostatistics\n\n\nBachelor of Science\nUniversity of Arizona 2011 - 2015 Molecular and Cellular Biology  Neuroscience and Cognitive Science Minor in Biochemistry"
-  },
-  {
-    "objectID": "about.html#experience",
-    "href": "about.html#experience",
-    "title": "Matthew Reyes, MPH",
-    "section": "Experience",
-    "text": "Experience\n\nDiversity, Equity, and Inclusion Intern\nCenter for Digital Health Innovation at University of California, San Francisco Nov 2022 - May 2023 \n- did stuff\n- did cool stuff\n\n\nData Consultant\nD-Lab at University of California, Berkeley Aug 2022 - May 2023 \n- did stuff\n- did cool stuff\n\n\nHealthcare UX Researcher and Designer\nGoInvo Apr 2022 - Aug 2023\n- did stuff\n- did cool stuff\n\n\nUX Design and Communications Intern\nKeva Health Dec 2021 - Apr 2022\n- did stuff\n- did cool stuff\n\n\nSenior Pulmonary Function Technician\nAdult Pulmonary Function Lab at University of California, San Francisco Jun 2016 - Apr 2022\n- did stuff\n- did cool stuff\n\n\nEmergency Room Medical Scribe\nCEP America Aug 2015 - May 2016\n- did stuff\n- did cool stuff\n\n\nInstructor\niD Tech May 2015 - Aug 2015\n- did stuff\n- did cool stuff\n\n\nLaboratory Teaching Aide\nCapaldi Lab at University of Arizona Aug 2014 - May 2015\n- did stuff\n- did cool stuff"
-  },
-  {
     "objectID": "about.html#about-me",
     "href": "about.html#about-me",
     "title": "Matthew Reyes, MPH",
     "section": "",
     "text": "My name is Matthew Reyes (he/him/his).\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
-  },
-  {
-    "objectID": "about.html#affiliations",
-    "href": "about.html#affiliations",
-    "title": "Matthew Reyes, MPH",
-    "section": "Affiliations",
-    "text": "Affiliations\n\nTriathlete\nUSA Triathlon 2018 - Present 70.3 and 140.6 distances.\n\n\nFOG Reading Partner\nSan Francisco Public Library 2018 - 2020 Volunteer reading partner with elementary school students learning to read.\n\n\nHack Mental Health\nUniversity of California, San Francisco 2019 Front-end web development contributor for a mood and wellness application as part of a hack-a-thon at UCSF.\n\n\nBoard Member and Camp Coordinator\nCamp Wildcat 2013 - 2015 Board member, logistics, and project manager for 200-person, cost-free camps for vulnerable children in Southern Arizona as part of a 501(c)(3) non-profit organization.\n\n\nMember and Committee Chair\nArizona Model United Nations Conference attendee and committee organizer for local highschool Model United Nations clubs in Arizona.\n\n\nField Qualified Rescuer\nSouthern Arizona Rescue Association 2012 - 2014 Volunteer rescuer, aiding Pima County Sheriff’s Department and community on search and rescue calls in Southern Arizona.\n:::"
-  },
-  {
-    "objectID": "about.html#skills",
-    "href": "about.html#skills",
-    "title": "Matthew Reyes, MPH",
-    "section": "Skills",
-    "text": "Skills\n\nData Science and Quantitative Methods\n\nPostgreSQL and SQL for relational database management\nSQL, SAS for data management and cleaning, summary statistics and simple visualizations\nR for advanced biostatistics, modeling, and complex visualizations\nQuarto for sharing data-oriented projects\nTableau for data dashboards and business intelligence\n\n\n\nUX Research and Qualitative Methods\n\nLeading focus groups, key-informant, and in-depth interviews\nCreated interview guides and checklists for structured & semi-structured interviews\nDesigned survey instruments in Qualtrics, focused on participant accessibility and equity\n\n\n\nProject Management\n\nCertified Scrum Master (CSM)\nNotion for general project management, notes, timelines, and tasks\nGitHub Projects for open-source project management\n\n\n\nWeb Development\n\nHTML/CSS/Javascript with React for general front-end development\nGatsby.js for static sites built with React\nNode.js and Express for RESTful back-end services\nApollo for GraphQL APIs\nPostgreSQL and Sequelize (ORM) for relational database management"
   }
 ]
