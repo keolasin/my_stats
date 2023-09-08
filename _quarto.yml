@@ -40,7 +40,13 @@ website:
         url: https://github.com/keolasin
   back-to-top-navigation: true
   page-navigation: true
-      
+
+google-analytics: "G-VMVLZT0XPQ"
+
+comments:
+  giscus:
+    repo: keolasin/my_stats
+
 execute:
   freeze: auto
 
@@ -53,4 +59,5 @@ format:
     toc: true
 
 editor: visual
-google-analytics: "G-VMVLZT0XPQ"
+
+
