@@ -4,25 +4,43 @@ author: 'Matthew Reyes'
 # table of contents settings
 toc: true
 toc-depth: 3
+title-block-banner: true
 
 # layout
 page-layout: article
 
 # bibliography settings
-bibliography: references.bib
 reference-location: margin
 citation-location: margin
 
 # figure/caption settings
 fig-cap-location: margin
 
+# code annotation
+code-annotations: select
+
 # comment settings
 comments:
   giscus:
     repo: keolasin/my_stats
 
+# code execution defaults
+execute: 
+  message: false
+  warning: false
+  echo: true
+format: 
+  html: 
+    fig-height: 5
+    fig-dpi: 300
+    fig-width: 8.88
+    fig-align: center
+knitr:
+  opts_chunk:
+    out.width: 80%
+    fig.showtext: TRUE
+    collapse: true
+    comment: "#>"
 
 # render settings for data
 freeze: true
-
-title-block-banner: true

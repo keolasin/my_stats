@@ -10,6 +10,7 @@ listing:
     categories: true
     #feed: true
 comments: false
+sidebar: false
 ---
 
 ## Blog Posts
