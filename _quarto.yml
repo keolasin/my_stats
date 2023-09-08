@@ -8,10 +8,11 @@ website:
     title: false
     background: primary
     search: true
-    right:
+    left: 
       - icon: house-door
         text: "Home"
         file: index.qmd
+    right:
       - icon: file-person
         text: "About"
         file: about.qmd

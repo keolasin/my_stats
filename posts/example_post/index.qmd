@@ -1,0 +1,20 @@
+---
+title: "Example Blog Post Title"
+description: "Short blog post description which is included on the listing page"
+author:
+  - name: Matthew Reyes
+    url: https://blog.mreyes.info/
+date: 09-08-2023
+categories: [Quarto, R] # self-defined categories
+citation: 
+  url: https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/
+image: preview_image.jpg
+draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+## Header 2
+
+The `title` defined in the header of the file is the header 1 for the blog post, so we always start with a `h2` header[^1]. Sometimes, I want to include an inline footnote^[Reyes, 2023].
+
+[^1]: This is a footnote, which will be automatically included in the footnotes section on render.
+

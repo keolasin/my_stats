@@ -1,6 +1,11 @@
 ---
 title: "Data in Public Health"
 description: "Thoughts on accessible & actionable data science to achieve health equity"
+listing: 
+    contents: posts
+    type: grid
+    sort: "date desc"
+    categories: true
 ---
 
-## List of blog posts
+## Blog Posts
