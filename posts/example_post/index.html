@@ -23,7 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -192,11 +211,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#header-2" id="toc-header-2" class="nav-link active" data-scroll-target="#header-2">Header 2</a></li>
+  <li><a href="#second-header" id="toc-second-header" class="nav-link active" data-scroll-target="#second-header">Second header</a>
+  <ul class="collapse">
+  <li><a href="#sub-header" id="toc-sub-header" class="nav-link" data-scroll-target="#sub-header">Sub-header</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -206,19 +228,31 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="header-2" class="level2">
-<h2 class="anchored" data-anchor-id="header-2">Header 2</h2>
-<p>The <code>title</code> defined in the header of the file is the header 1 for the blog post, so we always start with a <code>h2</code> header<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Sometimes, I want to include an inline footnote<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+<section id="second-header" class="level2">
+<h2 class="anchored" data-anchor-id="second-header">Second header</h2>
+<p>The <code>title</code> defined in the header of the file is the header 1 for the blog post, so we always start with a <code>h2</code> header<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This site was built following the blog of Samantha Csik <span class="citation" data-cites="csik2022">(<a href="#ref-csik2022" role="doc-biblioref">Csik 2022</a>)</span>.</p>
+<section id="sub-header" class="level3">
+<h3 class="anchored" data-anchor-id="sub-header">Sub-header</h3>
+<p>Third sub-header</p>
+<section id="smaller-header" class="level4">
+<h4 class="anchored" data-anchor-id="smaller-header">Smaller header</h4>
+<p>Forth sub-header</p>
+
 
 
 </section>
+</section>
+</section>
 
 
-<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-csik2022" class="csl-entry" role="listitem">
+Csik, Samantha. 2022. <span>“Adding a Blog to Your Existing <span>Quarto</span> Website.”</span> October 24, 2022. <a href="https://samanthacsik.github.io/posts/2022-10-24-quarto-blogs/">https://samanthacsik.github.io/posts/2022-10-24-quarto-blogs/</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>This is a footnote, which will be automatically included in the footnotes section on render.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>Reyes, 2023<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{reyes2023,
   author = {Reyes, Matthew},
@@ -597,9 +631,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <ul class="footer-items list-unstyled">
     <li class="nav-item">
     <a class="nav-link" href="https://mreyes.info">mreyes.info</a>
-  </li>  
-    <li class="nav-item">
-    <a class="nav-link" href="https://blog.mreyes.info">blog</a>
   </li>  
 </ul>
     </div>   
