@@ -1,5 +1,28 @@
-bibliography: references.bib
+# author settings
+author: 'Matthew Reyes'
 
+# table of contents settings
+toc: true
+toc-depth: 3
+
+# layout
+page-layout: article
+
+# bibliography settings
+bibliography: references.bib
+reference-location: margin
+citation-location: margin
+
+# figure/caption settings
+fig-cap-location: margin
+
+# comment settings
+comments:
+  giscus:
+    repo: keolasin/my_stats
+
+
+# render settings for data
 freeze: true
 
 title-block-banner: true

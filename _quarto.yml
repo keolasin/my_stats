@@ -41,10 +41,6 @@ website:
 
 google-analytics: "G-VMVLZT0XPQ"
 
-comments:
-  giscus:
-    repo: keolasin/my_stats
-
 execute:
   freeze: auto
 

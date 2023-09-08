@@ -4,8 +4,11 @@ description: "Thoughts on accessible & actionable data science to achieve health
 listing: 
     contents: posts
     type: grid
-    sort: "date desc"
+    sort-ui: true
+    filter-ui: true
+    fields: [date, title, reading-time, description, categories]
     categories: true
+    #feed: true
 comments: false
 ---
 
