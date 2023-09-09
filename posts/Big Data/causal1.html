@@ -8,9 +8,9 @@
 
 <meta name="author" content="Matthew Reyes">
 <meta name="dcterms.date" content="2023-09-08">
-<meta name="description" content="Short blog post description which is included on the listing page">
+<meta name="description" content="Introduction to an analysis of US Birth vital statistics using data-adaptive models">
 
-<title>Data in Public Health - Example Blog Post Title</title>
+<title>Data in Public Health - Causal Inference and Machine Learning: Part 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -33,7 +52,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/example_series/series1.html" rel="next">
+<link href="../../posts/Probability/dice1.html" rel="next">
+<link href="../../posts/Big Data/index.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -66,6 +86,11 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+<link href="../../site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="../../site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -107,7 +132,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/example_post/index.html">Posts</a></li><li class="breadcrumb-item"><a href="../../posts/example_post/index.html">Example Blog Post Title</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/example_post/index.html">Posts</a></li><li class="breadcrumb-item"><a href="../../posts/Big Data/index.html">Big Data Analysis</a></li><li class="breadcrumb-item"><a href="../../posts/Big Data/causal1.html">Causal Inference and Machine Learning: Part 1</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -120,15 +145,17 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Example Blog Post Title</h1>
+      <h1 class="title">Causal Inference and Machine Learning: Part 1</h1>
                   <div>
         <div class="description">
-          Short blog post description which is included on the listing page
+          Introduction to an analysis of US Birth vital statistics using data-adaptive models
         </div>
       </div>
                           <div class="quarto-categories">
                 <div class="quarto-category">Quarto</div>
                 <div class="quarto-category">R</div>
+                <div class="quarto-category">Machine Learning</div>
+                <div class="quarto-category">Causal Inference</div>
               </div>
                   </div>
   </div>
@@ -175,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/example_post/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/example_post/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Example Blog Post Title</span></a>
   </div>
 </li>
@@ -200,14 +227,14 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../posts/Big Data/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Big Data Analysis</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/Big Data/causal1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/Big Data/causal1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Causal Inference and Machine Learning: Part 1</span></a>
   </div>
 </li>
@@ -242,11 +269,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#second-header" id="toc-second-header" class="nav-link active" data-scroll-target="#second-header">Second header</a>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
+  <li><a href="#target-causal-parameter" id="toc-target-causal-parameter" class="nav-link" data-scroll-target="#target-causal-parameter">Target Causal Parameter</a></li>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data Exploration</a>
   <ul class="collapse">
-  <li><a href="#sub-header" id="toc-sub-header" class="nav-link" data-scroll-target="#sub-header">Sub-header</a></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
+  <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
+  <li><a href="#descriptive-statistics" id="toc-descriptive-statistics" class="nav-link" data-scroll-target="#descriptive-statistics">Descriptive Statistics</a></li>
+  <li><a href="#marginal-distributions-of-exposure-and-outcome" id="toc-marginal-distributions-of-exposure-and-outcome" class="nav-link" data-scroll-target="#marginal-distributions-of-exposure-and-outcome">Marginal Distributions of Exposure and Outcome</a></li>
   </ul></li>
-  <li><a href="#r-blog-posts" id="toc-r-blog-posts" class="nav-link" data-scroll-target="#r-blog-posts">R blog posts</a></li>
+  <li><a href="#expected-challenges" id="toc-expected-challenges" class="nav-link" data-scroll-target="#expected-challenges">Expected Challenges</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">What’s Next?</a></li>
   </ul>
 </nav>
     </div>
@@ -256,35 +290,77 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="second-header" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="second-header">Second header</h2>
-<div class="page-columns page-full"><p>The <code>title</code> defined in the header of the file is the header 1 for the blog post, so we always start with a <code>h2</code> header<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This site was built following the blog of Samantha Csik <span class="citation" data-cites="csik2022">[@csik2022]</span>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;This is a footnote, which will be automatically included in the footnotes section on render.</p></li></div></div>
-<section id="sub-header" class="level3">
-<h3 class="anchored" data-anchor-id="sub-header">Sub-header</h3>
-<p>Third sub-header</p>
-<section id="smaller-header" class="level4">
-<h4 class="anchored" data-anchor-id="smaller-header">Smaller header</h4>
-<p>Forth sub-header</p>
+<div class="cell">
+
+</div>
+<section id="background" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>As part of my graduate studies at UC Berkeley, I took a great class on Causal Inference &amp; Data-Adaptive Methods applied to problems in public health. This series builds on the learnings from that class to help cement and develop my understanding. In the course, we ended up estimating a target causal parameter using a number of models that we tried to identify to a statistical model. Those models estimating the average treatment effect (ATE) included:</p>
+<ul>
+<li>G-Computation (aka simple substitution)</li>
+<li>Inverse Probability Weighting (IPW)</li>
+<li>Targeted Maximum Likelihood Estimator (TMLE)</li>
+</ul>
+<p>In this introductory post to the series, I’ll provide a bit of information on data-adaptive methods vs traditional modelling, pose a research question, then identify a data set to clean and prepare for my analysis. Much of this work will be based on the work of researchers at UC Berkeley’s School of Public Health, particularly Mark van der Laan<span class="citation" data-cites="vanderlaan2011">(<a href="#ref-vanderlaan2011" role="doc-biblioref">Laan and Rose 2011</a>)</span>, Maya Petersen<span class="citation" data-cites="petersen2014">(<a href="#ref-petersen2014" role="doc-biblioref">M. L. Petersen and Laan 2014</a>)</span>, and Laura Balzer<span class="citation" data-cites="naimi2018">M. Petersen and Balzer (<a href="#ref-balzer2014" role="doc-biblioref">2023</a>)</span>.</p>
+<div class="no-row-height column-margin column-container"><div id="ref-vanderlaan2011" class="csl-entry" role="listitem">
+Laan, Mark J. van der, and Sherri Rose. 2011. <em>Targeted Learning</em>. Springer New York. <a href="https://doi.org/10.1007/978-1-4419-9782-1">https://doi.org/10.1007/978-1-4419-9782-1</a>.
+</div><div id="ref-petersen2014" class="csl-entry" role="listitem">
+Petersen, Maya L., and Mark J. van der Laan. 2014. <span>“Causal Models and Learning from Data.”</span> <em>Epidemiology</em> 25 (3): 418–26. <a href="https://doi.org/10.1097/ede.0000000000000078">https://doi.org/10.1097/ede.0000000000000078</a>.
+</div><div id="ref-balzer2014" class="csl-entry" role="listitem">
+Petersen, Maya, and Laura Balzer. 2023. <span>“Introduction to Causal Inference.”</span> UC Berkeley. 2023. <a href="https://www.ucbbiostat.com/about">https://www.ucbbiostat.com/about</a>.
+</div></div></section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p>Existing studies find that infants born at low birth weight (LBW) are at an increased risk of physical disabilities and impaired cognitive development. While genetic factors contribute to LBW, maternal smoking during pregnancy has been identified as the most significant modifiable risk factor. We seek to answer the following question: what is the effect of maternal smoking during pregnancy on the likelihood of having a LBW infant?</p>
+<p>The target population for this study is live singleton first births in the US in 2015. We are limiting the population to singleton first births because multiples are associated with lower birth weight, and infants from subsequent pregnancies have been shown to have higher birth weights than those from first pregnancies.</p>
+</section>
+<section id="target-causal-parameter" class="level2">
+<h2 class="anchored" data-anchor-id="target-causal-parameter">Target Causal Parameter</h2>
+<p>We aim to estimate the causal risk difference: <span class="math inline">\(\Psi^* (P^*) = P^* (Y1 - 1) - P^* (Y0 - 1)\)</span> <span class="math inline">\(= E^*(Y1) - E^*(Y0)\)</span></p>
+<p>The target causal parameter is the difference in the counterfactual risk of LBW if all expectant mothers in the population smoked during pregnancy vs.&nbsp;if all expectant mothers in the population did not smoke during pregnancy.</p>
+</section>
+<section id="data-exploration" class="level2">
+<h2 class="anchored" data-anchor-id="data-exploration">Data Exploration</h2>
+<p>First, we import the data set for 2022 and inspect it, including variables available.</p>
+<section id="variables" class="level3">
+<h3 class="anchored" data-anchor-id="variables">Variables</h3>
+<p>Variable Name Type Descriptive summary of measure</p>
+<p>smoked Exposure (A, binary) This variable is considered the intervention or exposure of interest - it’s a measure of whether the mother was considered a smoker (at least 1 cigarette/day) during any of the three trimesters.</p>
+<p>lbw Outcome (Y, binary) This variable is the outcome, which is the weight of the infant at time of birth, classified as low birth weight (1) when the birthweight was below 2500 grams. Birth weight greater than 2500 grams is coded as 0.</p>
+</section>
+<section id="data-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h3>
+<p>Then, we recode some of the variables of interest into outcome and exposure variables A and Y. We also prepare the covariates and endogenous variables for analysis by recoding them into indicator or dummy variables. We also remove missings or unknowns, which is a very conservative analysis approach - future analysis may utilize data imputation, but given the large number of records in this data set and the relatively small number of missing/unknown data, for the purpose of this assignment the more conservative approach is taken.</p>
+</section>
+<section id="descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-statistics">Descriptive Statistics</h3>
+<p>To better understand the data we’re working with and get a sense for the distributions across variables (W1,W2, W3, A, Y), we can observe the information presented in Table 1 below.</p>
+</section>
+<section id="marginal-distributions-of-exposure-and-outcome" class="level3">
+<h3 class="anchored" data-anchor-id="marginal-distributions-of-exposure-and-outcome">Marginal Distributions of Exposure and Outcome</h3>
 </section>
 </section>
+<section id="expected-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="expected-challenges">Expected Challenges</h2>
 </section>
-<section id="r-blog-posts" class="level2">
-<h2 class="anchored" data-anchor-id="r-blog-posts">R blog posts</h2>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">What’s Next?</h2>
 
 
-</section>
 
+</section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{reyes2023,
   author = {Reyes, Matthew and Reyes, Matthew},
-  title = {Example {Blog} {Post} {Title}},
+  title = {Causal {Inference} and {Machine} {Learning:} {Part} 1},
   date = {2023-09-08},
-  url = {https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/},
+  url = {https://blog.mreyes.info/posts/Big Data/causal1.html},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-reyes2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Reyes, Matthew, and Matthew Reyes. 2023. <span>“Example Blog Post
-Title.”</span> September 8, 2023. <a href="https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/">https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/</a>.
+Reyes, Matthew, and Matthew Reyes. 2023. <span>“Causal Inference and
+Machine Learning: Part 1.”</span> September 8, 2023. <a href="https://blog.mreyes.info/posts/Big Data/causal1.html">https://blog.mreyes.info/posts/Big
+Data/causal1.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -703,12 +779,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="keolasin/my_stats" data-repo-id="R_kgDOKNEEaw" data-category="General" data-category-id="DIC_kwDOKNEEa84CZL1l" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
+
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../posts/Big Data/index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Big Data Analysis</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/example_series/series1.html" class="pagination-link">
-        <span class="nav-page-text">Series: Examples 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/Probability/dice1.html" class="pagination-link">
+        <span class="nav-page-text">Table-Top Games and Probability</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

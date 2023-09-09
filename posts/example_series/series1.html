@@ -7,10 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Matthew Reyes">
-<meta name="dcterms.date" content="2023-09-08">
-<meta name="description" content="Short blog post description which is included on the listing page">
 
-<title>Data in Public Health - Example Blog Post Title</title>
+<title>Data in Public Health - Series: Examples 1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +31,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../posts/example_series/series1.html" rel="next">
+<link href="../../posts/Big Data/index.html" rel="next">
+<link href="../../posts/example_post/index.html" rel="prev">
+<script src="../../site_libs/quarto-listing/list.min.js"></script>
+<script src="../../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -65,12 +66,43 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-reading-time','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: [],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed slimcontent">
+<body class="nav-sidebar floating nav-fixed">
 
 
 <div id="quarto-search-results"></div>
@@ -107,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/example_post/index.html">Posts</a></li><li class="breadcrumb-item"><a href="../../posts/example_post/index.html">Example Blog Post Title</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../posts/example_post/index.html">Posts</a></li><li class="breadcrumb-item"><a href="../../posts/example_series/series1.html">Example Series</a></li><li class="breadcrumb-item"><a href="../../posts/example_series/series1.html">Series: Examples 1</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -119,18 +151,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Example Blog Post Title</h1>
-                  <div>
-        <div class="description">
-          Short blog post description which is included on the listing page
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">Quarto</div>
-                <div class="quarto-category">R</div>
-              </div>
-                  </div>
+    <div class="quarto-title column-page-right">
+      <h1 class="title">Series: Examples 1</h1>
+                      </div>
   </div>
     
   
@@ -139,22 +162,16 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p><a href="https://blog.mreyes.info/">Matthew Reyes</a> </p>
+               <p>Matthew Reyes </p>
             </div>
     </div>
       
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 8, 2023</p>
-      </div>
-    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -175,22 +192,22 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/example_post/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../posts/example_post/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Example Blog Post Title</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
  <span class="menu-text">Example Series</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../posts/example_series/series1.html" class="sidebar-item-text sidebar-link">
+  <a href="../../posts/example_series/series1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Series: Examples 1</span></a>
   </div>
 </li>
@@ -237,55 +254,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#second-header" id="toc-second-header" class="nav-link active" data-scroll-target="#second-header">Second header</a>
-  <ul class="collapse">
-  <li><a href="#sub-header" id="toc-sub-header" class="nav-link" data-scroll-target="#sub-header">Sub-header</a></li>
-  </ul></li>
-  <li><a href="#r-blog-posts" id="toc-r-blog-posts" class="nav-link" data-scroll-target="#r-blog-posts">R blog posts</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content quarto-banner-title-block page-columns page-full" id="quarto-document-content">
+<main class="content quarto-banner-title-block column-page-right" id="quarto-document-content">
 
 
 
 
-<section id="second-header" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="second-header">Second header</h2>
-<div class="page-columns page-full"><p>The <code>title</code> defined in the header of the file is the header 1 for the blog post, so we always start with a <code>h2</code> header<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This site was built following the blog of Samantha Csik <span class="citation" data-cites="csik2022">[@csik2022]</span>.</p><div class="no-row-height column-margin column-container"><li id="fn1"><p><sup>1</sup>&nbsp;This is a footnote, which will be automatically included in the footnotes section on render.</p></li></div></div>
-<section id="sub-header" class="level3">
-<h3 class="anchored" data-anchor-id="sub-header">Sub-header</h3>
-<p>Third sub-header</p>
-<section id="smaller-header" class="level4">
-<h4 class="anchored" data-anchor-id="smaller-header">Smaller header</h4>
-<p>Forth sub-header</p>
-</section>
-</section>
-</section>
-<section id="r-blog-posts" class="level2">
-<h2 class="anchored" data-anchor-id="r-blog-posts">R blog posts</h2>
 
 
-</section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{reyes2023,
-  author = {Reyes, Matthew and Reyes, Matthew},
-  title = {Example {Blog} {Post} {Title}},
-  date = {2023-09-08},
-  url = {https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/},
-  langid = {en}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-reyes2023" class="csl-entry quarto-appendix-citeas" role="listitem">
-Reyes, Matthew, and Matthew Reyes. 2023. <span>“Example Blog Post
-Title.”</span> September 8, 2023. <a href="https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/">https://blog.mreyes.info/posts/2023-09-08-quarto-blogs/</a>.
-</div></div></section></div></main> <!-- /main -->
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -703,12 +692,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="keolasin/my_stats" data-repo-id="R_kgDOKNEEaw" data-category="General" data-category-id="DIC_kwDOKNEEa84CZL1l" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
+      <a href="../../posts/example_post/index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Example Blog Post Title</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../posts/example_series/series1.html" class="pagination-link">
-        <span class="nav-page-text">Series: Examples 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../posts/Big Data/index.html" class="pagination-link">
+        <span class="nav-page-text">Big Data Analysis</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
