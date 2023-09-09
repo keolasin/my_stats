@@ -36,6 +36,8 @@ execute:
   echo: true
 format: 
   html: 
+    df-print: paged
+    code-fold: true # by default, keep code-chunks folded
     fig-height: 5
     fig-dpi: 300
     fig-width: 8.88

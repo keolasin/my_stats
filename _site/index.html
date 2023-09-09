@@ -76,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
     const options = {
       valueNames: ['listing-date','listing-title','listing-reading-time','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-categories"],
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -144,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#blog-posts" id="toc-blog-posts" class="nav-link active" data-scroll-target="#blog-posts">Blog Posts</a></li>
   </ul>
 </nav>
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(0)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Probability">Probability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Visualization">Visualization <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -201,7 +201,39 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </div>
 <div class="list grid quarto-listing-cols-3">
-
+<div class="g-col-1" data-index="0" data-categories="R,Probability,Visualization" data-listing-date-sort="1694070000000" data-listing-file-modified-sort="1694292825039" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<a href="./posts/Probability/dice1.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Table-Top Games and Probability
+</h5>
+<div class="listing-reading-time card-text text-muted">
+4 min
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+R
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Probability'); return false;">
+Probability
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('Visualization'); return false;">
+Visualization
+</div>
+</div>
+<div class="card-text listing-description">
+Using probability and visualizations to explore dice-rolls in combinations
+</div>
+<div class="card-attribution card-text-small end">
+<div class="listing-date">
+Sep 7, 2023
+</div>
+</div>
+</div>
+</div>
+</a>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
