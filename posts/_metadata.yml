@@ -1,3 +1,6 @@
+# default settings for blog posts in the posts directory
+# --- #
+
 # author settings
 author: 'Matthew Reyes'
 
@@ -8,6 +11,8 @@ title-block-banner: true
 
 # layout
 page-layout: article
+
+# default preview image
 
 # bibliography settings
 reference-location: margin

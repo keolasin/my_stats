@@ -1,0 +1,804 @@
+---
+# metadata
+title: "Causal Inference and Machine Learning: Part 1"
+description: "Introduction to an analysis of US Birth vital statistics using data-adaptive models"
+author:
+  - name: Matthew Reyes
+    url: https://blog.mreyes.info/
+date: 09-08-2023
+categories: [Quarto, R, Machine Learning, Causal Inference] # self-defined categories
+citation: 
+  url: https://blog.mreyes.info/posts/2023-09-08-Causal-Inference/
+image: preview_image.jpg
+
+# table of contents
+toc: true
+toc-expand: true
+
+# draft
+draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+## Background
+
+As part of my graduate studies at UC Berkeley, I took a great class on Causal Inference & Data-Adaptive Methods applied to problems in public health. This series builds on the learnings from that class to help cement and develop my understanding. In the course, we ended up estimating a target causal parameter using a number of models that we tried to identify to a statistcal model. Those models estimating the average treatment effect (ATE) included:
+
+- G-Computation (aka simple substitution)
+- Inverse Probability Weighting (IPW)
+- Targeted Maximum Likelihood Estimator (TMLE)
+
+In this introductory post to the series, I'll provide a bit of information on data-adaptive methods vs traditional modelling, pose a research question, then identify a data set to clean and prepare for my analysis. Much of this work will be based on the work of researchers at UC Berkeley's School of Public Health, particularly Mark van der Laan, Maya Petersen, and Laura Balzer.
+
+## Research Question
+
+Existing studies find that infants born at low birth weight (LBW) are at an increased risk of physical disabilities and impaired cognitive development. While genetic factors contribute to LBW, maternal smoking during pregnancy has been identified as the most significant modifiable risk factor. We seek to answer the following question: what is the effect of maternal smoking during pregnancy on the likelihood of having a LBW infant?
+
+The target population for this study is live singleton first births in the US in 2015. We are limiting the population to singleton first births because multiples are associated with lower birth weight, and infants from subsequent pregnancies have been shown to have higher birth weights than those from first pregnancies.
+
+
+## Target Causal Parameter
+
+We aim to estimate the causal risk difference:
+$\Psi^* (P^*) = P^* (Y1 - 1) - P^* (Y0 - 1)$ 
+$= E^*(Y1) - E^*(Y0)$
+
+The target causal parameter is the difference in the counterfactual risk of LBW if all expectant mothers in the population smoked during pregnancy vs. if all expectant mothers in the population did not smoke during pregnancy.
+
+## Data Set
+
+First, we import the data set for 2015 and inspect it, including variables available.
+
+```{r import-data, echo = FALSE, message = FALSE, warning = FALSE}
+# data set guide: https://data.nber.org/lbid/docs/LinkCO89Guide.pdf
+# raw data files:
+## download, unzip, and place in data folder:
+## http://www.nber.org/lbid/1989/linkco1989us_den.csv.zip
+## http://www.nber.org/lbid/1990/linkco1990us_den.csv.zip
+## http://www.nber.org/lbid/1991/linkco1991us_den.csv.zip
+
+here()
+df <- read_csv(here("data/linkco2015usden.csv"), col_names = TRUE)
+vars <- names(df)
+
+vars
+```
+
+Next, we select variables of interest for our analysis by subsetting from the larger data set.
+
+### Variables included in the dataset are as follows:
+```{r select-vars, echo = FALSE, message = FALSE, warning = FALSE}
+
+# subset the data to variables of interest
+df_tobacco <- df %>%
+  select(
+    # W1 variables
+    mrace15, mhisp_r, # race/ethnicity info
+    mager9, # mother's age group
+    dmar, # marital status
+    meduc, # highest education level obtained of mother
+    wic, # mother recipient of WIC
+    mhtr, # mother height
+    bmi, # mother bmi
+    rf_pdiab, # pre-pregnancy diabetes (mother)
+    rf_phype, # pre-pregnancy hypertension
+    recare, # month prenatal care began
+    # W2 variables
+    wtgain, # mother weight gain during gestation
+    rf_gdiab, # gestational diabetes
+    ip_gon, ip_syph, ip_chlam, ip_hepb, ip_hepc, # infectious diseases present at birth
+    # W3 variables
+    oegest_comb, # weeks of gestation (17-47)
+    dwgt_r, # mothers weight at time of birth
+    sex, # sex of infant assigned at birth
+    # Exposure variables
+    cig0_r, cig1_r, cig2_r, cig3_r, # smoking status during each trimester
+    # Outcome variables
+    bwtr4, # outcome variable (infant birth weight)
+    # subsetting/filtering variables
+    tbo_rec, # birth order of infant
+    illb_r, ilop_r, ilp_r # time since last live birth, last other pregnancy, last pregnancy
+  )
+
+```
+
+Variable Name
+Type
+Descriptive summary of measure
+
+smoked
+Exposure (A, binary)
+This variable is considered the intervention or exposure of interest - it’s a measure of whether the mother was considered a smoker (at least 1 cigarette/day) during any of the three trimesters.
+
+lbw
+Outcome (Y, binary)
+This variable is the outcome, which is the weight of the infant at time of birth, classified as low birth weight (1) when the birthweight was below 2500 grams. Birth weight greater than 2500 grams is coded as 0.
+
+### Data Cleaning
+
+Then, we recode some of the variables of interest into outcome and exposure variables A and Y. We also prepare the covariates and endogenous variables for analysis by recoding them into indicator or dummy variables. We also remove missings or unknowns, which is a very conservative analysis approach - future analysis may utilize data imputation, but given the large number of records in this data set and the relatively small number of missing/unknown data, for the purpose of this assignment the more conservative approach is taken.
+
+```{r recode-variables, echo = FALSE, message = FALSE, warning = FALSE}
+# Removing unknowns/missings
+df_noMissing <- df_tobacco %>%
+  filter(
+    bwtr4 != 4, # remove unknown birth weights
+    cig0_r != 6, cig1_r != 6, cig2_r != 6, cig3_r != 6, # remove unknown smoking status at each trimester
+    dwgt_r != 999, # remove unknown/unstated delivery weight of mother
+    oegest_comb != 99,
+    wic != "U",
+    meduc != 9,
+    mhtr != 99,
+    dmar != 9,
+    mhisp_r != 9,
+    rf_pdiab != "U", rf_gdiab != "U", rf_phype != "U", ip_gon !="U", ip_syph != "U", ip_chlam != "U", ip_hepb != "U", ip_hepc != "U",
+    ilop_r != 999, illb_r != 999, ilp_r != 999,
+    mrace15 != 99,
+    wtgain != 99,
+    bmi != 99,
+    tbo_rec != 9,
+    recare != 99
+  )
+
+# #W1 variables
+#     mrace15, mhisp_r, # race/ethnicity info
+#     mager9, # mother's age group
+#     dmar, # marital status
+#     meduc, # highest education level obtained of mother
+#     wic, # mother recipient of WIC
+#     mhtr, # mother height
+#     bmi, # mother bmi
+#     rf_pdiab, # pre-pregnancy diabetes (mother)
+#     rf_phype, # pre-pregnancy hypertension
+#     recare, # month prenatal care began
+# # W2 variables
+#     wtgain, # mother weight gain during gestation
+#     rf_gdiab, # gestational diabetes
+#     ip_gon, ip_syph, ip_chlam, ip_hepb, ip_hepc, # infectious diseases present at birth
+# # W3 variables
+#     oegest_comb, # weeks of gestation (17-47)
+#     dwgt_r, # mothers weight at time of birth
+#     sex, # sex of infant assigned at birth
+# # Exposure variables
+#     cig0_r, cig1_r, cig2_r, cig3_r, # smoking status during each trimester
+# # Outcome variables
+#     bwtr4, # outcome variable (infant birth weight)
+# # subsetting/filtering variables
+#     tbo_rec, # birth order of infant
+#     illb_r, ilop_r, ilp_r # time since last live birth, last other pregnancy, last pregnancy
+
+firstBorns <- df_noMissing %>%
+  filter(illb_r == 888)
+  
+# creating outcome and exposure variable
+df_prep <- firstBorns %>%
+  # add a Y outcome variable (lbw)
+  mutate(lbw = ifelse(bwtr4 == 1 | bwtr4 == 2, 1, 0)) %>% 
+  # create intervention variable A (smoked)
+  mutate(smoked = ifelse(cig1_r >= 1 | cig2_r >= 1 | cig3_r >= 1, 1, 0)) %>%
+  select(-bwtr4, -cig0_r, -cig1_r, -cig2_r, -cig3_r) # remove old variables used to create Y, A
+
+
+# change variables of interest to indicator variables/factors for analysis
+# helper function to create numerical indicator variables from Y/N coded variables
+create_indicator <- function(df, variables){
+  for (i in 1:length(variables)){
+    df[[variables[i]]] <- ifelse(df[[variables[i]]] == "Y", 1, 0)
+  }
+  return(df)
+}
+
+convert <- c("wic", "rf_pdiab", "rf_gdiab", "rf_phype", "ip_gon", "ip_syph", "ip_chlam", "ip_hepb", "ip_hepc")
+df_firstBorns <- create_indicator(df_prep, convert)
+
+smoke_marg <- df_firstBorns %>%
+  count(smoked)
+
+lbw_marg <- df_firstBorns %>%
+  count(lbw)
+
+# number of records in dataset
+n <- nrow(df_firstBorns)
+
+# number of columns (variables) in dataset
+n_cols <- length(df_firstBorns)
+```
+
+### Summary statistics of variables for analysis in the dataset
+
+To better understand the data we're working with and get a sense for the distributions across variables (W1,W2, W3, A, Y), we can observe the information presented in Table 1 below.
+
+```{r table1}
+head(df_firstBorns)
+
+summary_prep <- df_firstBorns %>%
+  select(-illb_r, -ilop_r, -ilp_r)
+summary_prep[,1:6] <- sapply(summary_prep[,1:6], as.factor)
+summary_prep[,9:11] <- sapply(summary_prep[,9:11], as.factor)
+summary_prep[,13:18] <- sapply(summary_prep[,13:18], as.factor)
+summary_prep[,21:24] <- sapply(summary_prep[,21:24], as.factor)
+
+summary_stats <- summarizor(summary_prep, by = "smoked", overall_label = "Overall")
+summary_stats <- as_flextable(summary_stats, spread_first_col = TRUE, separate_with = "variable")
+summary_stats <- labelizor(
+  x = summary_stats,
+  part = "header",
+  labels = c(
+    "0" = "No Smoking (A=0)", 
+    "1" = "Smoked (A=1)"
+  )
+)
+
+summary_stats <- labelizor(
+  x = summary_stats,
+  part = "body",
+  j = c("sex"),
+  labels = c(
+    "sex" = "Sex of Child",
+    "M" = "Male",
+    "F" = "Female"
+  )
+)
+
+summary_stats <- labelizor(x = summary_stats, part = "header", labels = stringr::str_to_title)
+
+#### Uncomment to save table1 in various file formats ####
+
+# save_as_docx("table1" = summary_stats, path = here("tables/table1.docx"))
+# save_as_image(summary_stats, path = here("tables/table1.png"))
+summary_stats
+```
+
+```{r collinearity}
+
+corr_matrix <- df_firstBorns %>%
+  select(-illb_r, -ilop_r, -ilp_r, -sex) %>%
+  cor()
+
+corrplot(corr_matrix, method = "number", order = "hclust", title = "Collinearity Matrix of Variables", bg ="white")
+
+# lbw ~ oegest_comb,    -0.60
+# dwgt_r ~ bmi,          0.84
+# mager9 ~ wic,         -0.43
+# mager9 ~ meduc,        
+
+# we should keep bmi over dwgt_r, dwgt_r has less of an association to outcome (lbw) than bmi.
+
+# arbitrary high correlation considered to be greater than 0.7 to 1 (or -0.7 to -1)
+correlation <- as.data.frame(corr_matrix)
+high_correlation <- correlation %>%
+  filter_all(any_vars((0.5 < . & . < 1) | (-1 < . & . < -0.5)))
+```
+
+We should keep bmi over dwgt_r, dwgt_r has less of an association to outcome (lbw) than bmi.
+
+```{r main-terms-model}
+
+# Adjust for W1
+model1 <- glm(lbw ~ mrace15+mhisp_r+mager9+dmar+meduc+wic+mhtr+bmi+rf_pdiab+rf_phype+recare, family = "binomial", data = df_firstBorns)
+summary(model1)
+
+```
+
+The dataset consists of a number of variables describing births and pregnancies in the United States in the year 2015 with `r n` records after removing missing values, obtained from the National Center for Health Statistics.
+
+### Marginal Distributions of Exposure and Outcome
+
+For the mothers smoking status during the pregnancy, we observe:
+`r smoke_marg`
+
+For the low birth weight status at time of birth (outcome), we observe:
+`r lbw_marg`
+
+## Expected Challenges
+
+Anticipated challenges include:
+
+Identifying singleton births - we may need to create a unique identifier for each mother 
+Computational strain given the size of the data 
+Remaining potential for uncontrolled confounding (e.g., genetics, traumatic experiences during pregnancy)
+
+## Expected Deviations
+
+Potentially measuring only singleton births (single live birth per delivery) or even first live births from that mother.
+
+## Analysis
+
+### Sampling from Target Population
+
+```{r sample-5percent}
+
+set.seed(252)
+n <- nrow(df_firstBorns)
+sample_size <- n*0.05 # sample 5% of the larger dataframe, n = number of records in df
+
+# take sample
+df_5percent <- df_firstBorns[sample(n, size = sample_size, replace = FALSE),]
+
+# create infectious disease indicator variable
+df_5percent <- df_5percent %>% 
+  # indicator variable for infectious disease present
+  mutate(sti = ifelse(ip_gon == 1 | ip_syph == 1 | ip_chlam == 1 | ip_hepb == 1 | ip_hepc == 1, 1, 0)) %>%
+  select(-ip_gon, -ip_syph, -ip_chlam, -ip_hepb, -ip_hepc, -illb_r, -ilop_r, -ilp_r)
+
+
+write.csv(df_5percent, file=here("sample_5percent.csv"), row.names=FALSE)
+
+```
+
+```{r sample-1270}
+
+n2 <- nrow(df_firstBorns)
+sample_size <- n2*0.001 # sample 5% of the larger dataframe, n = number of records in df
+
+# take sample
+df_1270 <- df_firstBorns[sample(n2, size = sample_size, replace = FALSE),]
+
+# create infectious disease indicator variable
+df_1270 <- df_1270 %>% 
+  # indicator variable for infectious disease present
+  mutate(sti = ifelse(ip_gon == 1 | ip_syph == 1 | ip_chlam == 1 | ip_hepb == 1 | ip_hepc == 1, 1, 0)) %>%
+  select(-ip_gon, -ip_syph, -ip_chlam, -ip_hepb, -ip_hepc, -illb_r, -ilop_r, -ilp_r)
+
+
+write.csv(df_1270, file=here("sample_1270.csv"), row.names=FALSE)
+
+```
+
+### G-Comp
+```{r g-comp}
+model1 <- glm(lbw ~ ., family = "binomial", data = df_5percent)
+summary(model1)
+
+#Step 2: Copy the original dataset into two new DFs: exposed and unexposed
+exposed<-unexposed<-df_5percent
+#Set smoked=1 in exposed and smoked=0 in unexposed
+exposed$smoked<-1
+unexposed$smoked<-0
+
+#Step 3: Using the original model, predict outcome for each individual in the sample under the exposure
+predictY.exposed<-predict(model1, newdata=exposed, type='response')
+
+#Step 4: Using the original model, predict outcome for each individual in the sample under no exposure
+predictY.unexposed<-predict(model1, newdata=unexposed, type='response')
+
+# Step 5. take the mean of difference in the predicted outcomes to average over the distribution of the covariates - NOTE- do we have to change this based on the binary outcome?
+mean(predictY.exposed - predictY.unexposed)
+
+
+```
+
+
+### IPW
+```{r IPW}
+#2. Estimate the epxosure mechanism P(A|W)
+IPWdata<-df_5percent%>%select(-lbw)
+prob.AW.reg<-glm(smoked~., family="binomial", data=IPWdata)
+
+# 3. # predicted probability of smoking, given baseline characteristics
+prob.1W <- predict(prob.AW.reg, type= "response")
+
+# predicted probability of not smoking, given baseline characteristics
+prob.0W <- 1 - prob.1W
+
+#4. Distribution of predicted probabilities
+summary(prob.1W)
+summary(prob.0W)
+
+# 5. Create the weights
+wt1 <- as.numeric(df_5percent$smoked==1)/prob.1W
+wt0 <- as.numeric(df_5percent$smoked==0)/prob.0W
+#check weights
+summary(wt1) # one adult is being upweighted by 5113
+summary(wt0)
+
+# 6. Point estimate:
+iptw <- mean(wt1*df_5percent$lbw) - mean( wt0*df_5percent$lbw)
+iptw
+
+# 7. Stabilized IPTW estimator - Modified Horvitz-Thompson estimator
+iptw.st <- sum(wt1*df_5percent$lbw)/sum(wt1) - sum(wt0*df_5percent$lbw)/sum(wt0)
+iptw.st
+
+```
+
+
+### SuperLearner
+```{r SL-setup}
+# set seed and library
+set.seed(252)
+library(earth)
+library(SuperLearner)
+
+# remove mediators from dataset
+df <- df_5percent %>%
+  select(-wtgain, -rf_gdiab, -sti, -oegest_comb, -dwgt_r, -sex)
+
+# 63530 obs, so n/V = 63530/5 = 12706 obs per fold
+n <- nrow(df)
+V <- 5
+n.per.fold <- n/V
+
+fold <- NULL
+for (k in 1:V) {
+  fold <- c(fold, rep(k, n.per.fold))
+}
+
+# check to ensure we have 12706 per fold
+# table(fold)
+# head(fold)
+
+# sampling
+fold <- sample(fold)
+
+# prediction and cross-validated matrices
+pred <- matrix(NA, nrow = n, ncol = 4)
+cv.risk <- matrix(NA, nrow = V, ncol = 4)
+
+```
+
+```{r SL-training}
+
+for( v in 1:V ) {
+  validation <- df[fold==v,]
+  training <- df[fold!=v,]
+  # QA check n/V = 12706
+  # (nrow(validation))
+  
+  # fit estimators
+  estA <- glm(lbw ~ ., family = "binomial", data = training)
+  estB <- glm(lbw ~ smoked+mrace15 + mhisp_r + mager9*meduc + dmar + wic + mhtr + bmi + rf_pdiab + rf_phype + recare, family = "binomial", data = training)
+  estC <- glm(lbw ~ smoked+mrace15 + mhisp_r + mager9 + dmar + meduc + wic + mhtr*bmi + rf_pdiab + rf_phype + recare, family = "binomial", data = training)
+  estD <- glm(lbw ~ smoked+mrace15*mhisp_r + mager9*meduc + dmar + wic + mhtr + bmi + rf_pdiab + rf_phype + recare, family = "binomial", data = training)
+  
+  # predictions
+  predA <- predict(estA, newdata = validation, type = 'response')
+  predB <- predict(estB, newdata = validation, type = 'response')
+  predC <- predict(estC, newdata = validation, type = 'response')
+  predD <- predict(estD, newdata = validation, type = 'response')
+  
+  # predictions df
+  pred[fold==v, ] <- cbind(predA, predB, predC, predD)
+  
+  # difference in predictions Y and validation Y
+  cv.risk[v, ] <- c(
+    mean((validation$lbw - predA)^2),
+    mean((validation$lbw - predB)^2),
+    mean((validation$lbw - predC)^2),
+    mean((validation$lbw - predD)^2)
+  )
+}
+
+```
+
+```{r SL-select-estimator}
+
+colMeans(cv.risk)
+# estimator 1 - the main terms with all W1 has lowest average cross-validated risk
+```
+
+```{r SL-setup2}
+
+discrete.sl <- glm(lbw ~ ., family = "binomial", data = df)
+summary(discrete.sl)
+
+source(here('wrappers/Wrappers.R'))
+
+SL.library <- c("SL.glm.EstA", "SL.glm.EstB", "SL.glm.EstC", "SL.glm.EstD", "SL.ridge", "SL.rpart", "SL.earth")
+
+X <- subset(df, select = -lbw)
+```
+
+```{r SL-run}
+
+SuperLearner(Y=df$lbw, X = X, SL.library = SL.library, cvControl = list(V=5))
+
+# cross-validate SL
+CV.SL.out <- CV.SuperLearner(Y=df$lbw, X=X, SL.library = SL.library, cvControl = list(V = 5), innerCvControl = list(list(V=5)))
+summary(CV.SL.out)
+```
+
+### TMLE
+
+```{r TMLE}
+df_1270 <- read.csv(here("sample_1270.csv"))
+
+# set up our small df for bootstrapping 500 times
+df2 <- df_1270 %>%
+  select(-wtgain, -rf_gdiab, -sti, -oegest_comb, -dwgt_r, -sex, -tbo_rec)
+
+n <- nrow(df2)
+
+# function for obtaining point estimates
+run.tmle <- function(df, SL.library){
+  # set new X, X1 (X|A=1), X0 (X|A=0)
+  X <- subset(df, select = -lbw)
+  X0 <- X
+  X1 <- X
+  X1$smoked <- 1
+  X0$smoked <- 0
+  
+  # estimate E_0(Y|A,W) with SL
+  SL.outcome2 <- SuperLearner(Y=df$lbw, X = X, SL.library = SL.library, family="binomial")
+  
+  # get the expected outcome, given the observed exposure and covariates
+  expY.givenAW <- predict(SL.outcome2, newdata=df)$pred
+  # expected outcome, given A=1 and covariates
+  expY.given1W <- predict(SL.outcome2, newdata=X1)$pred
+  # expected outcome, given A=0 and covariates
+  expY.given0W <- predict(SL.outcome2, newdata=X0)$pred
+  
+  # simple sub estimator:
+  PsiHat.SS <- mean(expY.given1W - expY.given0W)
+  
+  # IPW:
+  # Super Learner for the exposure mechanism P_0(A=1|W)
+  X = subset(df, select = -lbw:smoked)
+  SL.exposure<- SuperLearner(Y=df$smoked, X=X, SL.library=SL.library, family="binomial")
+ 
+  # generate the predicted prob of being exposed, given covariates
+  probA1.givenW <- SL.exposure$SL.predict
+  # generate the predicted prob of not being exposed, given covariates
+  probA0.givenW <- 1- probA1.givenW
+  # clever covariate
+  H.AW <- as.numeric(df$smoked==1)/probA1.givenW - as.numeric(df$smoked==0)/probA0.givenW
+ 
+  # also want to evaluate the clever covariate at A=1 and A=0 for all participants
+  H.1W <- 1/probA1.givenW
+  H.0W <- -1/probA0.givenW
+ 
+  # IPW estimate
+  PsiHat.IPW <- mean(H.AW*df$lbw)
+  
+  # TMLE
+  
+  # Update the initial estimator of E_0(Y|A,W)
+  # run logistic regression of Y on H.AW using the logit of the estimates as offset
+  logitUpdate<- glm( df$lbw ~ -1 +offset(qlogis(expY.givenAW)) + H.AW, family='binomial')
+  epsilon <- logitUpdate$coef
+ 
+  # obtain the targeted estimates
+  expY.givenAW.star<- plogis( qlogis(expY.givenAW)+ epsilon*H.AW )
+  expY.given1W.star<- plogis( qlogis(expY.given1W)+ epsilon*H.1W )
+  expY.given0W.star<- plogis( qlogis(expY.given0W)+ epsilon*H.0W )
+ 
+  # TMLE point estimate
+  PsiHat.TMLE<- mean(expY.given1W.star - expY.given0W.star)
+
+  # Return a list with the point estimates, targeted estimates of E_0(Y|A,W),
+  # and the vector of clever covariates
+
+  # data.frame to hold point estimates
+  estimates <- data.frame(cbind(PsiHat.SS, PsiHat.IPW, PsiHat.TMLE))
+  # data.frame to hold targeted outcome predictions
+  predictions <- data.frame(cbind(expY.givenAW.star, expY.given1W.star, expY.given0W.star))
+  # label the columns of predictions
+  colnames(predictions)<- c('givenAW', 'given1W', 'given0W')
+  # return a list
+  return( list(estimates=estimates, predictions=predictions, H.AW=H.AW) )
+  
+}
+
+# specify our SL library
+SL.library <- c("SL.mean", "SL.glm", "SL.step.interaction")
+
+# run the function
+out <- run.tmle(df=df2, SL.library = SL.library)
+
+```
+
+```{r TMLE-influence-bias-curve}
+
+# point est
+PsiHat.TMLE <- out$estimates$PsiHat.TMLE
+# plugin
+IC <- out$H.AW*(df2$lbw - out$predictions[,'givenAW']) + out$predictions[,'given1W'] - out$predictions[,'given0W'] - PsiHat.TMLE
+summary(IC)
+
+# estimate sigma^2
+varHat.IC <- var(IC)/n
+varHat.IC
+
+# standard error est
+SE <- sqrt(varHat.IC)
+SE
+
+# 95% Confidence intervals
+alpha <- 0.05
+c(PsiHat.TMLE+qnorm(alpha/2, lower.tail=T)*se, PsiHat.TMLE+qnorm(alpha/2, lower.tail=F)*se)
+
+# p-value
+2*pnorm( abs(PsiHat.TMLE /se), lower.tail=F)
+
+```
+
+```{r NP-Boot}
+# B = 500 bootstrapped samples
+B <- 500
+
+est.boot <- data.frame(matrix(NA, nrow=B, ncol=3))
+set.seed(252)
+
+for(b in 1:B) {
+  index.boot <- sample(1:n, replace = T)
+  df.boot <- df2[index.boot,]
+  
+  # calling our run.tmle
+  est.boot[b,] <- run.tmle(df=df.boot, SL.library = SL.library)$estimates
+  
+  # iteration:
+  print(b)
+}
+colnames(est.boot) <- c("SS", "IPW", "TMLE")
+save(est.boot, file = 'boot_1270.Rdata')
+summary(est.boot)
+
+var(est.boot[,'SS'])
+var(est.boot[,'IPW'])
+var(est.boot[,'TMLE'])
+
+create.CI <- function(pt, boot, alpha=0.05){
+  Zquant <- qnorm(alpha/2, lower.tail=F)
+  CI.normal <- c(pt - Zquant*sd(boot), pt + Zquant*sd(boot) )
+  CI.quant <- quantile(boot, prob=c(0.025,0.975) )
+  yay <- data.frame(t ( c(pt, CI.normal, CI.quant))*100)
+  colnames(yay)<- c('pt', paste0(c('CI.lo', 'CI.hi'), '.normal'),
+  paste0(c('CI.lo', 'CI.hi'), '.quant') )
+  round(yay, 1)
+}
+
+create.CI(pt = out$estimates$PsiHat.TMLE, boot = est.boot[,"TMLE"])
+
+```
+
+
+```{r }
+# 
+# # call the SuperLearner
+# SL.outcome2 <- SuperLearner(Y = df2$lbw, X = X, SL.library = SL.library, family = "binomial")
+# SL.outcome2
+# 
+# expY.givenAW <- predict(SL.outcome2, newdata = X)$pred
+# expY.given1W <- predict(SL.outcome2, newdata = X1)$pred
+# expY.given0W <- predict(SL.outcome2, newdata = X0)$pred
+```
+
+```{r estimate-distribution}
+# # estimating P0( A=1 | W )
+# X <- subset(df2, select = -c(smoked, lbw))
+# SL.exposure2 <- SuperLearner(Y = df2$smoked, X = X, SL.library = SL.library, family = "binomial")
+# 
+# # probability of smoking during pregnancy given baseline W1
+# probA1.givenW <- SL.exposure2$SL.predict
+# # also equivalent to,
+# # check <- predict(SL.exposure, newdata=X)$pred
+# # sum(probA1.givenW != check)
+# 
+# # probability of not smoking during pregnancy given baseline W1
+# probA0.givenW <- 1 - probA1.givenW
+# 
+# # summary
+# summary(data.frame(probA1.givenW, probA0.givenW))
+```
+
+Are these predictions reasonably bounded away from 0 and 1?
+
+```{r clever-covariate}
+# 
+# H.AW <- as.numeric(df2$smoked ==1)/probA1.givenW - as.numeric(df2$smoked == 0)/probA0.givenW
+# H.1W <- 1/probA1.givenW
+# H.0W <- -1/probA0.givenW
+# 
+# # IPW estimator of the G-comp formula:
+# PsiHat.IPW <- mean( H.AW * df2$lbw )
+# PsiHat.IPW
+# 
+# # estimator E_0( Y | A, W )
+# logitUpdate <- glm(df2$lbw ~ -1 + offset(qlogis(expY.givenAW)) + H.AW, family = "binomial")
+# epsilon <- logitUpdate$coef
+# epsilon
+# 
+# # obtaining target estimates
+# expY.givenAW.star <- plogis(qlogis(expY.givenAW) + epsilon*H.AW)
+# expY.given1W.star <- plogis(qlogis(expY.given1W) + epsilon*H.1W)
+# expY.given0W.star <- plogis(qlogis(expY.given0W) + epsilon*H.0W)
+# 
+# # updating
+# coef(glm(df2$lbw ~ -1 + offset(qlogis(expY.givenAW.star)) + H.AW, family = "binomial"))
+# 
+# # estimate Psi(P_0)
+# PsiHat.SS <- mean(expY.given1W - expY.given0W)
+# PsiHat.TMLE <- mean(expY.given1W.star - expY.given0W.star)
+# 
+# # comparing the estimates...
+# c(PsiHat.SS, PsiHat.IPW, PsiHat.TMLE)
+
+```
+
+```{r ltmle}
+
+# library(ltmle)
+# lmtle.SL <- lmtle(data = df2, Anodes = "smoked", Ynodes="lbw", abar = list(1,0), SL.library = SL.library)
+# summary(ltmle.SL)
+# 
+# ltmle.parametric<- ltmle(data=df2, Anodes='smoked', Ynodes='lbw', abar=list(1,0), Qform=c(Y="Q.kplus1 ~ smoked + mrace15 + mhisp_r + mager9 + dmar + meduc + wic + mhtr + bmi + rf_pdiab + rf_phype + recare"), gform="smoked ~ mrace15 + mhisp_r + mager9 + dmar + meduc + wic + mhtr + bmi + rf_pdiab + rf_phype + recare")
+# summary(ltmle.parametric)
+# 
+# # unadjusted estimators
+# df2.U <- data.frame(U=1, df2)
+# ltmle.unadj <- ltmle(data = df2.U, Anodes='smoked', Ynodes='lbw', abar = list(1,0), Qform = c(Y="Q.kplus1 ~ smoked"), gform = "smoked~U")
+# summary(ltmle.unadj)
+# 
+# # double robustness
+# ltmle.DR <- ltmle(data = df2.U, Anodes='smoked', Ynodes='lbw', abar=list(1,0), SL.library = SL.library, gform="smoked~U")
+# summary(ltmle.DR)
+
+```
+
+```{r ltmle-type1-errors}
+
+library(ltmle)
+Psi.P0 <- 0
+n <- nrows(df2)
+R <- 500
+pt.est <- ci.cov <- reject <- rep(NA,R)
+
+for(r in 1:R) {
+  sampler <- sample(1:n, replace = T)
+  newData <- df2[sampler,]
+  out.temp <- lmtle(data = newData, Anodes = 'smoked', Ynodes = 'lbw', abar=list(1,0), SL.library = SL.library, estimate.time = F)
+  out.temp <- summary(out.temp)$effect.measures$ATE
+  pt.est[r] <- out.temp$estimate
+  ci.cov[r] <- out.temp$CI[1] <= Psi.P0 & Psi.P0 <= out.temp$CI[2]
+  reject[r] <- out.temp$pvalue < 0.05
+  print(r)
+}
+
+save(pt.est, ci.cov, reject, file = 'tmle_type1s.Rdata')
+pdf(file = "hists_TMLE.pdf")
+hist(pt.est)
+
+# type 1 error rate
+mean(reject)
+
+# CI coverage
+mean(ci.cov)
+
+```
+
+
+
+
+## Works Cited
+
+Almond, Douglas, Kenneth Y. Chay and David S. Lee. "The Costs Of Low Birth Weight," Quarterly Journal of Economics, 2005, v120(3,Aug), 1031-1083.
+
+Bacci S, Bartolucci F, Chiavarini M, Minelli L, Pieroni L. Differences in birthweight outcomes: a longitudinal study based on siblings. Int J Environ Res Public Health. 2014 Jun;11(6):6472-84. doi: 10.3390/ijerph110606472. PMID: 25003169; PMCID: PMC4076673.
+
+Bohn C, Vogel M, Poulain T et al.  Birth weight increases with birth order despite decreasing maternal pregnancy weight gain. Acta Paediatr 2021;110:1218–24.
+
+National Center for Health Statistics (2015). Data File Documentations, Birth Cohort Linked Birth/Infant Death, 2015, National Center for Health Statistics, Hyattsville, Maryland. https://www.nber.org/research/data/linked-birthinfant-death-cohort-data
+
+## Marginal Distribution Tables
+```{r marginals, echo = FALSE, message = FALSE, warning = FALSE}
+# helper function, create counts
+counter <- function(df){
+  for (k in 1:length(df)){
+  result <- df %>%
+      group_by(df[k]) %>%
+      summarise(
+        n = n()
+      )
+  print(result)
+  }
+}
+
+# create tables of marginal distributions
+# counter(df_firstBorns)
+# 
+# summary(df_firstBorns)
+
+ggplot(data = df_firstBorns) +
+  geom_histogram(aes(x=smoked))
+ggplot(data = df_firstBorns) +
+  geom_histogram(aes(x=lbw))
+```
