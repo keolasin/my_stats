@@ -4,10 +4,6 @@
     "items": []
   },
   {
-    "listing": "/posts/example_series/series1.html",
-    "items": []
-  },
-  {
     "listing": "/index.html",
     "items": [
       "/posts/Probability/dice1.html"
@@ -18,5 +14,9 @@
     "items": [
       "/posts/Probability/dice1.html"
     ]
+  },
+  {
+    "listing": "/posts/example_series/series1.html",
+    "items": []
   }
 ]
