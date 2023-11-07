@@ -1,26 +1,5 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Matthew Reyes, MPH",
-    "section": "",
-    "text": "Email\n  \n  \n     LinkedIn\n  \n  \n     GitHub\n  \n\n  \n  \n\n\nMy name is Matthew Reyes (he/him/his).\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
-  },
-  {
-    "objectID": "about.html#about-me",
-    "href": "about.html#about-me",
-    "title": "Matthew Reyes, MPH",
-    "section": "",
-    "text": "My name is Matthew Reyes (he/him/his).\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
-  },
-  {
-    "objectID": "archive.html",
-    "href": "archive.html",
-    "title": "Archive",
-    "section": "",
-    "text": "Table-Top Games and Probability\n\n\n\n\n\n\n\n\n\nSep 7, 2023\n\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "posts/Probability/dice1.html",
     "href": "posts/Probability/dice1.html",
     "title": "Table-Top Games and Probability",
@@ -47,5 +26,26 @@
     "title": "Table-Top Games and Probability",
     "section": "Data Generation",
     "text": "Data Generation\n\nTwelve-sided die\nFirst, let’s simulate the random roll of a twelve-sided die. It has equal chance of landing on numbers 1-12, and we’ll roll the die 1000 times.\n\n1n &lt;- 1000\n2d12 &lt;- sample(1:12, n, replace = TRUE)\n3df.1d12 &lt;- as.data.frame(table(d12))\n\n\n1\n\nThe number of times we want to roll our die\n\n2\n\nUsing the function sample(), we create a vector with of our random sample, of size n, for possible outcomes provided (numbers 1-6). We set replace to TRUE because we can roll any given number on any subsequent roll - set to false, it would remove an outcome once it has been rolled.\n\n3\n\nStoring our result in a dataframe for plotting later.\n\n\n\n\n\n\nTwo six-sided dice\nNext, let’s simulate the two six-sided dice in a similar fashion:\n\nd6 &lt;- sample(1:6, n, replace = TRUE) + sample(1:6, n, replace = TRUE)\ndf.2d6 &lt;- as.data.frame(table(d6))\n\n\n\nPrep for Visualization\nWe created two dataframes of our generated data, df.1d12 and df.2d6. Let’s add some descriptive names to our outcomes (the numbers rolled) and the frequency of each outcome in the n trials.\n\nlibrary(tidyverse)\ncolumn_names &lt;- c(\"outcome\", \"count\")\ncolnames(df.1d12) &lt;- column_names\ncolnames(df.2d6) &lt;- column_names\n\ndf.1d12 &lt;- df.1d12 %&gt;%\n  mutate(\n    probability = count / n,\n    source = \"1d12\"\n  )\n\ndf.2d6 &lt;- df.2d6 %&gt;%\n  mutate(\n    probability = df.2d6$count / n,\n    source = \"2d6\"\n  )\n\ncombined_df &lt;- rbind(df.1d12, df.2d6)\n\n\n\nVisualize\nLet’s create two, side-by-side histograms to examine the relative frequency of each outcome.\n\n\nCode\nlibrary(ggplot2)\n\ntitle_text &lt;- sprintf(\n  \"Simulating %.f rolls for 1d12 vs 2d6\", \n  n\n)\ncaption_text &lt;- sprintf(\n  \"Mean for 12-sided die: %.2f. Mean for 2, 6-sided dice: %.2f\", \n  mean(d12), \n  mean(d6)\n)\n\nggplot(combined_df, aes(x = outcome, y = probability, fill = source)) +\n  geom_bar(stat = \"identity\") +\n  geom_vline(data = subset(combined_df, source == \"2d6\"), aes(xintercept = mean(d6)), color = \"blue\", linetype = \"dashed\")+\n  geom_vline(data = subset(combined_df, source == \"1d12\"), aes(xintercept = mean(d12)), color = \"red\", linetype = \"dashed\")+\n  labs(\n    title = title_text,\n    x = \"Outcome\",\n    y = \"Relative Frequency\",\n    fill = \"Source\",\n    caption = caption_text\n  ) + \n  theme_minimal() +\n  facet_wrap(~ source, ncol=2)\n\n\n\n\n\nFigure 1: Charts\n\n\n\n\nBased on the above, we can see that the 1d12 has an equal chance of hitting outcomes 1 through 12 (approximately uniformly distributed based on our simulation), while the 2d6 approximately follows a normal distribution. The 1d12 will hit higher and lower numbers more frequently than the 2d6, but because the 2d6 can never have an outcome of 1, it will, on average, deal more damage."
+  },
+  {
+    "objectID": "archive.html",
+    "href": "archive.html",
+    "title": "Archive",
+    "section": "",
+    "text": "Table-Top Games and Probability\n\n\n\n\n\n\n\n\n\nSep 7, 2023\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Matthew Reyes, MPH",
+    "section": "",
+    "text": "Email\n  \n  \n     LinkedIn\n  \n  \n     GitHub\n  \n\n  \n  \n\n\nMy name is Matthew Reyes (he/him/his).\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
+  },
+  {
+    "objectID": "about.html#about-me",
+    "href": "about.html#about-me",
+    "title": "Matthew Reyes, MPH",
+    "section": "",
+    "text": "My name is Matthew Reyes (he/him/his).\nI’m an aspiring public health professional and data scientist. I’m most passionate about digital health equity, epidemiology, and improving community health.\nI spend my free time with my dog, Bisbee, and getting outdoors to climb rocks or bike around."
   }
 ]

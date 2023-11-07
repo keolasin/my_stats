@@ -19,18 +19,18 @@ toc-expand: true
 draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
 ---
 
-## Second header
+## Summary
 
-The `title` defined in the header of the file is the header 1 for the blog post, so we always start with a `h2` header[^1]. This site was built following the blog of Samantha Csik [@csik2022].
+Reference one (Reyes, 2023)[^1][@reyes2023].
 
-[^1]: This is a footnote, which will be automatically included in the footnotes section on render.
+## Background
 
-### Sub-header
+## Question
 
-Third sub-header
+## Methods
 
-#### Smaller header
+### Data Sources
 
-Forth sub-header
+## Results
 
-## R blog posts
+## Conclusion

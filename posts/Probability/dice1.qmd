@@ -85,7 +85,7 @@ df.2d6 <- df.2d6 %>%
 combined_df <- rbind(df.1d12, df.2d6)
 ```
 
-### Visualize
+## Visualize
 
 Let's create two, side-by-side histograms to examine the relative frequency of each outcome.
 
