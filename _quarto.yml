@@ -1,50 +1,8 @@
 project:
   type: website
 
-# website info
-website:
-  title: "Data in Public Health"
-  description: "Accessible, actionable data science to achieve health equity"
-  # navigation
-  navbar:
-    title: false
-    background: primary
-    search: true
-    left: 
-      - icon: house-door
-        text: "Home"
-        file: index.qmd
-    right:
-      - icon: file-person
-        text: "About"
-        file: about.qmd
-  # sidebar
-  sidebar:
-    style: floating
-    search: true
-    contents: posts
-  # footer
-  page-footer: 
-    left: 
-      - href: https://mreyes.info
-        text: mreyes.info
-    center:
-      - icon: code-slash
-        href: https://github.com/keolasin/my_stats
-    right:
-      - icon: envelope
-        href: mailto:matthew@mreyes.info
-      - icon: linkedin
-        url: https://linkedin.com/u/reyesmatthew
-      - icon: github
-        url: https://github.com/keolasin
-  page-navigation: true
-
-# cookies
-google-analytics: 
-  tracking-id: "G-VMVLZT0XPQ"
-  anonymize-ip: true
-cookie-consent: true
+metadata-files: 
+  - _website.yml
 
 # execution on render
 execute:
@@ -62,4 +20,5 @@ format:
 # rstudio option
 editor: visual
 
-
+# python
+jupyter: python3

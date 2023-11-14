@@ -1,0 +1,58 @@
+---
+# metadata
+title: "Real Time Strategy, Real Time Analysis"
+description: "Exploring associations in a professional e-sports tournament"
+author:
+  - name: Matthew Reyes
+    url: https://blog.mreyes.info/
+date: 10-10-2023
+categories: [R, Analysis, Visualization, e-sports, Starcraft 2] # self-defined categories
+citation: 
+  url: https://blog.mreyes.info/posts/Games/Starcraft2.html
+image: preview_image.jpg
+bibliography: references.bib
+
+# html formatting
+format: 
+  html:
+    code-fold: false
+
+# table of contents
+toc: true
+toc-expand: true
+toc-depth: 3
+
+# draft
+draft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!
+---
+
+```{r env-setup}
+#| echo: false
+#| results: 'hide'
+
+renv::restore()
+renv::use(lockfile = 'renv.lock')
+renv::install("showtext")
+
+```
+
+## Summary
+
+## Background
+
+## Question
+
+## Methods
+
+### Data Sources
+
+## Results
+
+## Conclusion
+
+```{r env-save}
+#| echo: false
+#| results: 'hide'
+
+renv::snapshot()
+```

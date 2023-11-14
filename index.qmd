@@ -3,7 +3,7 @@ title: "Data in Public Health"
 description: "Thoughts on accessible & actionable data science to achieve health equity"
 listing: 
     contents: posts
-    type: grid
+    type: default
     sort-ui: true
     filter-ui: true
     fields: [date, title, reading-time, description, categories]
