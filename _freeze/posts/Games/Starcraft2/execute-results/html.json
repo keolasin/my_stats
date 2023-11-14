@@ -1,0 +1,18 @@
+{
+  "hash": "28021c76ed8cc36554110acaff10947d",
+  "result": {
+    "markdown": "---\n# metadata\ntitle: \"Real Time Strategy, Real Time Analysis\"\ndescription: \"Exploring associations in a professional e-sports tournament\"\nauthor:\n  - name: Matthew Reyes\n    url: https://blog.mreyes.info/\ndate: 10-10-2023\ncategories: [R, Analysis, Visualization, e-sports, Starcraft 2] # self-defined categories\ncitation: \n  url: https://blog.mreyes.info/posts/Games/Starcraft2.html\nimage: preview_image.jpg\nbibliography: references.bib\n\n# html formatting\nformat: \n  html:\n    code-fold: false\n\n# table of contents\ntoc: true\ntoc-expand: true\ntoc-depth: 3\n\n# draft\ndraft: true # setting this to `true` will prevent your post from appearing on your listing page until you're ready!\n---\n\n::: {.cell hash='Starcraft2_cache/html/env-setup_509416d0b46ebe4117428400b015fe41'}\n\n:::\n\n\n## Summary\n\n## Background\n\n## Question\n\n## Methods\n\n### Data Sources\n\n## Results\n\n## Conclusion\n\n\n::: {.cell hash='Starcraft2_cache/html/env-save_f66f5ca3443491b67f8dd47fcd702248'}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-in-header": [
+        "<link href=\"../../site_libs/pagedtable-1.1/css/pagedtable.css\" rel=\"stylesheet\" />\r\n<script src=\"../../site_libs/pagedtable-1.1/js/pagedtable.js\"></script>\r\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
