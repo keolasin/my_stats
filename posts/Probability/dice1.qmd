@@ -27,6 +27,15 @@ draft: false # setting this to `true` will prevent your post from appearing on y
 
 ---
 
+```{r env-setup}
+#| echo: false
+#| results: 'hide'
+
+renv::restore()
+renv::use(lockfile = 'renv.lock')
+renv::install("showtext")
+
+```
 ## Background
 
 Some friends started playing the new Baldur's Gate game, a video-game based on Dungeon's and Dragons. These pen and pencil board games famously use a lot of math and statistics, and keeping track of all the interactions can quickly get dizzying. When attacking a monster in the game, one might use a weapon where the damage dealt is based on the roll of a single die, or multiple dice. It can get complicated when assessing whether damage is even going to be dealt (whether the player swung and missed, or swung and hit), or when there are modifiers like critical misses, hits, or additional bonuses applied, but getting a basic sense of average damage dealt by certain weapons over the course of a game can help players.
@@ -121,3 +130,11 @@ ggplot(combined_df, aes(x = outcome, y = probability, fill = source)) +
 ```
 
 Based on the above, we can see that the 1d12 has an equal chance of hitting outcomes 1 through 12 (approximately uniformly distributed based on our simulation), while the 2d6 approximately follows a normal distribution. The 1d12 will hit higher and lower numbers more frequently than the 2d6, but because the 2d6 can never have an outcome of 1, it will, on average, deal more damage.
+
+
+```{r env-save}
+#| echo: false
+#| results: 'hide'
+
+renv::snapshot()
+```
