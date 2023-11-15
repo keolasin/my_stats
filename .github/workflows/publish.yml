@@ -24,6 +24,9 @@ jobs:
         with:
           r-version: '4.2.1'
 
+      - name: Setup Python
+        uses: actions/setup-python@v3
+
       - name: Setup R dependencies (via renv)
         uses: r-lib/actions/setup-renv@v2
 
