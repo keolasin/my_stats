@@ -12,8 +12,8 @@ execute:
 format:
   html:
     theme:
-      light: a11y
-      dark: vapor
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 
