@@ -27,13 +27,11 @@ draft: false # setting this to `true` will prevent your post from appearing on y
 
 ---
 
-```{r}
+```{r renv-setup}
 #| echo: false
 #| results: 'hide'
 
-renv::restore()
 renv::use(lockfile = 'renv.lock')
-renv::install('showtext')
 
 ```
 
@@ -133,7 +131,7 @@ ggplot(combined_df, aes(x = outcome, y = probability, fill = source)) +
 
 Based on the above, we can see that the 1d12 has an equal chance of hitting outcomes 1 through 12 (approximately uniformly distributed based on our simulation), while the 2d6 approximately follows a normal distribution. The 1d12 will hit higher and lower numbers more frequently than the 2d6, but because the 2d6 can never have an outcome of 1, it will, on average, deal more damage.
 
-```{r renv-breakdown}
+```{r env-save}
 #| echo: false
 #| results: 'hide'
 

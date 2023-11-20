@@ -30,9 +30,7 @@ draft: true # setting this to `true` will prevent your post from appearing on yo
 #| echo: false
 #| results: 'hide'
 
-renv::restore()
 renv::use(lockfile = 'renv.lock')
-renv::install("showtext")
 
 ```
 
