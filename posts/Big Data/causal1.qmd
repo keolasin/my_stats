@@ -20,10 +20,6 @@ draft: true # setting this to `true` will prevent your post from appearing on yo
 bibliography: references.bib
 ---
 
-```{r}
-
-```
-
 ## Background
 
 As part of my graduate studies at UC Berkeley, I took a great class on Causal Inference & Data-Adaptive Methods applied to problems in public health. This series builds on the learnings from that class to help cement and develop my understanding. In the course, we ended up estimating a target causal parameter using a number of models that we tried to identify to a statistical model. Those models estimating the average treatment effect (ATE) included:
