@@ -135,6 +135,7 @@ Based on the above, we can see that the 1d12 has an equal chance of hitting outc
 #| echo: false
 #| results: 'hide'
 
-renv::snapshot()
+# save the environment/dependencies for developing this post.
+# renv::snapshot(lockfile = '/posts/Probability/renv.lock')
 
 ```

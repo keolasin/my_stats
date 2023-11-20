@@ -7,6 +7,7 @@ metadata-files:
 # execution on render
 execute:
   freeze: auto
+  cache: false
 
 # html/styling stuff
 format:
