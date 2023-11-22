@@ -1,14 +1,58 @@
 /*-- scss:defaults --*/
 // Base Document Colors
 // scss-docs-start theme-color-variables
-$primary:       #6098D8; 
-$secondary:     #83690C;
-$success:       #798BE4;
-$info:          #E6D2C9;
-$warning:       #B75279;
-$danger:        #903C5C;
-$light:         #EDF3FD;
-$dark:          #212529;
+$theme: "a11y" !default;
 
-$link-color: $secondary;
-$body-bg: $light;
+// #DBE7FB; light blue text
+// #E6D2C9; champagne hover
+// #E1B8C8; pink active
+// #BA2320; red
+// #be8b4b; brown
+// #254640; dark green
+// #e2ddd7; white
+// #809595; grey
+// #f7c672; yellow
+
+$white: #FFFBF8;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #6c757d;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #212529;
+
+$grays: map-merge( ( "100": $gray-100, "200": $gray-200, "300": $gray-300, "400": $gray-400, "500": $gray-500, "600": $gray-600, "700": $gray-700, "800": $gray-800, "900": $gray-900 ), () );
+
+$blue: #6098d8;
+$indigo: #254640;
+$purple: #6f42c1;
+$green: #289878;
+$yellow: #f7c672;
+$orange: #ee6b42;
+$red: #ba2320;
+$pink: #E6d2c9;
+$teal: #a1d1bf;
+$cyan: #83e0e5;
+
+$colors: map-merge( ( "blue": $blue, "indigo": $indigo, "purple": $purple, "pink": $pink, "red": $red, "orange": $orange, "yellow": $yellow, "green": $green, "teal": $teal, "cyan": $cyan, "white": $white, "gray": $gray-600, "gray-dark": $gray-800 ), () );
+
+$primary:       $indigo; 
+$secondary:     $pink;
+$success:       $green;
+$info:          $blue;
+$warning:       $orange;
+$danger:        $red;
+$light: $gray-100;
+$dark: $gray-800;
+
+$theme-colors: map-merge( ( "primary": $primary, "secondary": $secondary, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "light": $light, "dark": $dark ), () );
+$theme-color-interval: 8%;
+$yiq-contrasted-threshold: 150;
+$yiq-text-dark: $gray-900;
+$yiq-text-light: $white;
+
+$body-bg: $white;
