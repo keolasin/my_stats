@@ -39,19 +39,13 @@ $cyan: #83e0e5;
 
 $colors: map-merge( ( "blue": $blue, "indigo": $indigo, "purple": $purple, "pink": $pink, "red": $red, "orange": $orange, "yellow": $yellow, "green": $green, "teal": $teal, "cyan": $cyan, "white": $white, "gray": $gray-600, "gray-dark": $gray-800 ), () );
 
-$primary:       $pink; 
-$secondary:     $teal;
+$primary:       $teal; 
+$secondary:     $pink;
 $success:       $green;
 $info:          $blue;
 $warning:       $orange;
 $danger:        $red;
-$light:         $gray-800;
-$dark:          $gray-100;
 
 $theme-colors: map-merge( ( "primary": $primary, "secondary": $secondary, "success": $success, "info": $info, "warning": $warning, "danger": $danger, "light": $light, "dark": $dark ), () );
 $theme-color-interval: 8%;
 $yiq-contrasted-threshold: 150;
-$yiq-text-dark: $white;
-$yiq-text-light: $gray-900;
-
-$body-bg: $white;
