@@ -13,8 +13,8 @@ execute:
 format:
   html:
     theme:
-      light: flatly
-      dark: darkly
+      light: [a11y, theme-light.scss]
+      dark: [a11y, theme-dark.scss]
     css: styles.css
     toc: true
 
